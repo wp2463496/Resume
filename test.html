@@ -6,4 +6,22 @@
 <body>
    <h1> <a href="scheme://hbt/app">Android打开APP</a></hi>
    <h1> <a href="hangzhounvzhuang://">iOS打开APP</a></hi>
+   <h1> <a href="scheme://hbt/app" onclick="openApp()">Android打开APP1</a></hi>
+    
 </body>
+
+    
+function openApp() {
+    // 通过iframe的方式试图打开APP，如果能正常打开，会直接切换到APP
+    var ifr = document.createElement('iframe');
+    ifr.src = 'scheme://hbt/app';
+    ifr.style.display = 'none';
+    document.body.appendChild(ifr);
+    //切换到iframe时
+    //此时,会有个问题,如后切换到应用时间小于killer所需要杀死loop的时间,loop就会跳到下载提示,killer`就失去作用了
+    countDown();
+    window.setTimeout(function() {
+        document.body.removeChild(ifr);
+    },
+    5000);
+ }
